@@ -1,0 +1,74 @@
+<!--<!DOCTYPE HTML>-->
+<!--<html>-->
+<!--<head>-->
+    <!--<title>Flask-SocketIO Test</title>-->
+    <!--<form>-->
+    <!--<input type="text" id="device">-->
+    <!--<input type="submit">-->
+    <!--</form>-->
+    <!--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>-->
+    <!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>-->
+    <!--<script type="text/javascript" charset="utf-8">-->
+    <!--$(function() {-->
+      <!--var socket = io.connect('http://' + document.domain + ':' + location.port);-->
+      <!--socket.on('update', function() {-->
+        <!--var data = message;-->
+        <!--$("table").append("<tr><td>" + data.device +  "</td></tr>");-->
+      <!--});-->
+
+       <!--$('#form').submit(function(){-->
+       <!--socket.emit('update', $('#device').val());-->
+        <!--//socket.emit('message', "device");-->
+        <!--//$('#Input').val('');-->
+        <!--return false;-->
+      <!--})-->
+      <!--$("form").submit(function(event) {-->
+        <!--var data = {"device" : $("#device").val())};-->
+        <!--socket.emit('update', data));-->
+
+      <!--});-->
+    <!--});-->
+    <!--</script>-->
+<!--</head>-->
+<!--<body>-->
+    <!--<h3>Demo-Flask-SocketIO</h3>-->
+    <!--<p id='test'> Hello </p>-->
+<!--</body>-->
+<!--</html>-->
+
+<html>
+<head>
+<title>Chat Room</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    var socket = io.connect( 'http://' + document.domain + ':' + location.port )
+	<!--var socket = io.connect('http://127.0.0.1:5000');-->
+	socket.on('connect', function() {
+		socket.send('');
+	});
+	socket.on('message', function(msg) {
+		$("#messages").append('<li>'+msg+'</li>');
+		<!--console.log('Received message');-->
+	});
+	$('#sendbutton').on('click', function() {
+
+		if ($('#myMessage').val())
+		{
+			socket.send($('#myMessage').val());
+			$("#messages").append($('#myMessage').val());
+		    $('#myMessage').val('');
+
+		}
+	});
+});
+</script>
+<ul id="messages"></ul>
+<input type="text" id="myMessage">
+<button id="sendbutton">Send</button>
+</body>
+</html>
