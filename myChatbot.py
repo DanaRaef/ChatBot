@@ -94,7 +94,7 @@ class myChatbot :
         return adj
 
     def construct_response(self, pronoun, noun, verb, sentence):
-        print(pronoun, noun, verb, sentence)
+#         print(pronoun, noun, verb, sentence)
         resp = []
 
         # if pronoun:
